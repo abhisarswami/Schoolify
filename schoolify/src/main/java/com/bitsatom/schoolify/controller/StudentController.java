@@ -1,0 +1,66 @@
+package com.bitsatom.schoolify.controller;
+
+import java.util.List;
+
+import javax.inject.Inject;
+
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
+
+import com.bitsatom.schoolify.model.Student;
+import com.bitsatom.schoolify.service.StudentService;
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
+
+@RestController
+@EnableAutoConfiguration
+@RequestMapping(value = "/students")
+@Api(value = "Student API", description = "Student API")
+public class StudentController {
+
+	private StudentService studentService;
+
+	@Inject
+	public StudentController(StudentService studentService) {
+		this.studentService = studentService;
+	}
+
+	@RequestMapping(value = "/{student_id}", method = RequestMethod.GET)
+	@ApiOperation(value = "Get Student", notes = "Get the details of a specific student", response = Student.class)
+	public @ResponseBody
+	Student getStudent(@PathVariable String student_id) {
+		return studentService.getStudent(student_id);
+	}
+
+	@RequestMapping(method = RequestMethod.GET)
+	@ApiOperation(value = "Get Students", notes = "Get the list of students", response = Student.class, responseContainer = "List")
+	public List<Student> getStudents() {
+		return studentService.getStudents();
+	}
+
+	@RequestMapping(method = RequestMethod.POST)
+	@ApiOperation(value = "Create Student", notes = "Create a student", response = Student.class)
+	public @ResponseBody
+	HttpEntity<Student> createStudent(@RequestBody Student student) {
+		Student createdStudent = studentService.createStudent(student);
+		createdStudent.add(linkTo(
+				methodOn(StudentController.class).createStudent(student))
+				.withSelfRel());
+		return new ResponseEntity<Student>(createdStudent, HttpStatus.CREATED);
+	}
+
+	@RequestMapping(value = "/{student_id}", method = RequestMethod.DELETE)
+	public @ResponseBody
+	void deleteStudent(@PathVariable String student_id) {
+		studentService.deleteStudent(student_id);
+	}
+}
