@@ -12,7 +12,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.bitsatom.schoolify.dao.StudentRepository;
+import com.bitsatom.schoolify.persistence.StudentRepository;
 import com.bitsatom.schoolify.model.Student;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -24,7 +24,7 @@ public class StudentServiceImplTest {
 	
 	@Before
 	public void setup(){
-		studentService = new StudentServiceImpl(studentRepository);
+		studentService = new StudentServiceImpl();
 	}
 	
 	@Test

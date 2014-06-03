@@ -1,10 +1,12 @@
-package com.bitsatom.schoolify.dao;
+package com.bitsatom.schoolify.persistence;
 
 import java.util.List;
-import org.springframework.data.mongodb.repository.MongoRepository;
+
+import org.springframework.data.repository.CrudRepository;
+
 import com.bitsatom.schoolify.model.Student;
 
-public interface StudentRepository extends MongoRepository<Student, String> {
+public interface StudentRepository extends CrudRepository<Student, String> {
 
     public Student findByFirstName(String firstName);
     public List<Student> findByLastName(String lastName);

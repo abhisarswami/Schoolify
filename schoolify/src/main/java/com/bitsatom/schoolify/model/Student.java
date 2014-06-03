@@ -1,26 +1,41 @@
 package com.bitsatom.schoolify.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import org.springframework.hateoas.ResourceSupport;
 
-import com.wordnik.swagger.annotations.ApiModel;
-import com.wordnik.swagger.annotations.ApiModelProperty;
-
-
-@ApiModel(value = "Student Model", description = "Student Model")
-public class Student extends ResourceSupport{
-
-	@ApiModelProperty(value = "id", required = true)
+@NoArgsConstructor
+@Entity
+@Table(name="STUDENTS")
+public class Student{
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Getter
     private String id;
-
-	@ApiModelProperty(value = "Student's first name", required = true)
+	
 	@Setter @Getter
+	@Column(name="first_name")
     private String firstName;
-	@ApiModelProperty(value = "Student's last name", required = true)
+	
 	@Setter @Getter
+	@Column(name="last_name")
 	private String lastName;
-
+	
+	@Setter @Getter
+	private String clazzId;
     
+	public Student(final String firstName, final String lastName){
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+
 }

@@ -25,9 +25,9 @@ import com.wordnik.swagger.annotations.ApiOperation;
 
 @RestController
 @EnableAutoConfiguration
-@RequestMapping(value = "/students")
-@Api(value = "Student API", description = "Student API")
-public class StudentController {
+@RequestMapping(value = "/clazz")
+@Api(value = "Class API", description = "Student API")
+public class ClazzController {
 
 	@Autowired
 	private StudentService studentService;
@@ -35,11 +35,11 @@ public class StudentController {
 	private StudentResourceAssembler studentResourceAssembler;
 
 	@Inject
-	public StudentController(StudentService studentService) {
+	public ClazzController(StudentService studentService) {
 		this.studentService = studentService;
 	}
 
-	@RequestMapping(value = "/{student_id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{clazz_id}", method = RequestMethod.GET)
 	@ApiOperation(value = "Get Student", notes = "Get the details of a specific student", response = Student.class)
 	public @ResponseBody
 	StudentResource.StudentResponse getStudent(@PathVariable String student_id) {
@@ -67,7 +67,7 @@ public class StudentController {
 				createdStudentResource, HttpStatus.CREATED);
 	}
 
-	@RequestMapping(value = "/{student_id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/{clazz_id}", method = RequestMethod.DELETE)
 	public @ResponseBody
 	void deleteStudent(@PathVariable String student_id) {
 		studentService.deleteStudent(student_id);

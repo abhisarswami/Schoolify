@@ -1,4 +1,4 @@
-package com.bitsatom.schoolify;
+package com.bitsatom.schoolify.controller;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
