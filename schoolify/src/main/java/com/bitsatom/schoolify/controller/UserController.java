@@ -46,7 +46,7 @@ public class UserController {
 	@RequestMapping(value = "/{user_id}", method = RequestMethod.GET)
 	@ApiOperation(value = "Get user", notes = "Get the details of a specific user", response = Student.class)
 	public @ResponseBody
-	UserResource.UserResponse getStudent(@PathVariable String user_id) {
+	UserResource.UserResponse getStudent(@PathVariable int user_id) {
 		return userResourceAssembler.toResource(userService
 				.findUserById(user_id));
 	}
@@ -71,7 +71,7 @@ public class UserController {
 
 	@RequestMapping(value = "/{student_id}", method = RequestMethod.DELETE)
 	public @ResponseBody
-	void deleteStudent(@PathVariable String user_id) {
+	void deleteStudent(@PathVariable int user_id) {
 		userService.deleteUser(user_id);
 	}
 }

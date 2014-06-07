@@ -1,5 +1,6 @@
 package com.bitsatom.schoolify.model;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -12,20 +13,24 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 
 @Entity
+@ToString
 @Table(name="SCHOOLIFY_USERS")
 public class User 
 {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Getter @Setter
+	@Column(name="id")
 	private int id;
 	
 	@Setter @Getter
@@ -43,8 +48,12 @@ public class User
 	private Date dob;
 	
 	@Getter @Setter
-	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="user_id")
+	@ManyToMany(targetEntity = Role.class,fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinTable(
+            name="user_roles",
+            joinColumns = @JoinColumn( name="user_id"),
+            inverseJoinColumns = @JoinColumn( name="role_id")
+    )
 	private Set<Role> roles = new HashSet<Role>();
 
 	public User() {
@@ -65,5 +74,8 @@ public class User
 		this.dob = dob;
 	}
 	
+	public void addRoles(Role... roles) {
+		this.roles.addAll(Arrays.asList(roles));
+	}
 
 }

@@ -18,7 +18,7 @@ public class StudentServiceImpl implements StudentService  {
 	 * @see com.bitsatom.schoolify.service.StudentService#getStudent(java.lang.String)
 	 */
 	@Override
-	public Student getStudent(final String student_id){
+	public Student getStudent(final int student_id){
 		return studentRepository.findOne(student_id);
 	}
 	
@@ -42,7 +42,7 @@ public class StudentServiceImpl implements StudentService  {
 	 * @see com.bitsatom.schoolify.service.StudentService#deleteStudent(java.lang.String)
 	 */
 	@Override
-	public void deleteStudent(final String student){
+	public void deleteStudent(final int student){
 		studentRepository.delete(student);
 	}
 }

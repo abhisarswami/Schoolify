@@ -42,7 +42,7 @@ public class StudentController {
 	@RequestMapping(value = "/{student_id}", method = RequestMethod.GET)
 	@ApiOperation(value = "Get Student", notes = "Get the details of a specific student", response = Student.class)
 	public @ResponseBody
-	StudentResource.StudentResponse getStudent(@PathVariable String student_id) {
+	StudentResource.StudentResponse getStudent(@PathVariable int student_id) {
 		return studentResourceAssembler.toResource(studentService
 				.getStudent(student_id));
 	}
@@ -69,7 +69,7 @@ public class StudentController {
 
 	@RequestMapping(value = "/{student_id}", method = RequestMethod.DELETE)
 	public @ResponseBody
-	void deleteStudent(@PathVariable String student_id) {
+	void deleteStudent(@PathVariable int student_id) {
 		studentService.deleteStudent(student_id);
 	}
 	

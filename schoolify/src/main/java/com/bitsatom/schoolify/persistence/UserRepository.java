@@ -1,11 +1,12 @@
 package com.bitsatom.schoolify.persistence;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.bitsatom.schoolify.model.User;
 
-
-public interface UserRepository extends CrudRepository<User, String>{
+@Transactional(readOnly = true) 
+public interface UserRepository extends JpaRepository<User, Integer>{
 
 	public abstract User findByEmail(String email);
 	public abstract User findByEmailAndPassword(String email, String password);

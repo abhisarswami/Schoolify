@@ -39,7 +39,7 @@ public class ClazzController {
 		this.studentService = studentService;
 	}
 
-	@RequestMapping(value = "/{clazz_id}", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/{clazz_id}", method = RequestMethod.GET)
 	@ApiOperation(value = "Get Student", notes = "Get the details of a specific student", response = Student.class)
 	public @ResponseBody
 	StudentResource.StudentResponse getStudent(@PathVariable String student_id) {
@@ -71,7 +71,7 @@ public class ClazzController {
 	public @ResponseBody
 	void deleteStudent(@PathVariable String student_id) {
 		studentService.deleteStudent(student_id);
-	}
+	}*/
 	
 	// TODO implementation of Patch
 }
