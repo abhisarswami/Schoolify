@@ -18,7 +18,8 @@ public class SecurityUser extends User implements UserDetails
 		if(user != null)
 		{
 			this.setId(user.getId());
-			this.setName(user.getName());
+			this.setFirstName(user.getFirstName());
+			this.setLastName(user.getLastName());
 			this.setEmail(user.getEmail());
 			this.setPassword(user.getPassword());
 			this.setDob(user.getDob());

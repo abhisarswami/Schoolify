@@ -25,7 +25,6 @@ import com.bitsatom.schoolify.service.UserService;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 
-
 @RestController
 @EnableAutoConfiguration
 @RequestMapping(value = "/users")
@@ -34,10 +33,10 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private UserResourceAssembler userResourceAssembler;
-	
+
 	@Inject
 	public UserController(UserService userService) {
 		this.userService = userService;
@@ -63,7 +62,10 @@ public class UserController {
 	HttpEntity<UserResource.UserResponse> createUser(
 			@RequestBody UserResource.NewUser user) {
 		UserResource.UserResponse createdStudentResource = userResourceAssembler
-				.toResource(userService.createUser(new User(user.getUser().getName(), user.getUser().getEmail(), user.getUser().getPassword(), user.getUser().getDob())));
+				.toResource(userService.createUser(new User(user.getUser()
+						.getFirstName(), user.getUser().getLastName(), user
+						.getUser().getEmail(), user.getUser().getPassword(),
+						user.getUser().getDob())));
 
 		return new ResponseEntity<UserResource.UserResponse>(
 				createdStudentResource, HttpStatus.CREATED);

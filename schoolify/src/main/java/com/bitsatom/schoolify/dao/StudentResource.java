@@ -21,6 +21,7 @@ public class StudentResource {
 		@ApiModelProperty(value = "Student's last name", required = true)
 		@Getter
 		private String lastName;
+		@ApiModelProperty(value = "Student's class", required = true)
 		@Setter @Getter
 		private String clazzId;
 		
@@ -42,6 +43,10 @@ public class StudentResource {
 		@ApiModelProperty(value = "Student's last name", required = true)
 		@Getter
 		private String lastName;
+		
+		@ApiModelProperty(value = "Student's class", required = true)
+		@Setter @Getter
+		private String clazzId;
 
 		public StudentResponse(final String id, final String firstName,
 				final String lastname) {

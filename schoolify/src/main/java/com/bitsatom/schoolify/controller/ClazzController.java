@@ -6,20 +6,14 @@ import javax.inject.Inject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bitsatom.schoolify.dao.StudentResource;
-import com.bitsatom.schoolify.dao.assembler.StudentResourceAssembler;
+import com.bitsatom.schoolify.dao.ClazzResource;
+import com.bitsatom.schoolify.dao.assembler.ClazzResourceAssembler;
 import com.bitsatom.schoolify.model.Student;
-import com.bitsatom.schoolify.service.StudentService;
+import com.bitsatom.schoolify.service.ClazzService;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 
@@ -30,48 +24,24 @@ import com.wordnik.swagger.annotations.ApiOperation;
 public class ClazzController {
 
 	@Autowired
-	private StudentService studentService;
+	private ClazzService clazzService;
 	@Autowired
-	private StudentResourceAssembler studentResourceAssembler;
+	private ClazzResourceAssembler clazzResourceAssembler;
 
 	@Inject
-	public ClazzController(StudentService studentService) {
-		this.studentService = studentService;
+	public ClazzController(ClazzService clazzService) {
+		this.clazzService = clazzService;
 	}
 
-	/*@RequestMapping(value = "/{clazz_id}", method = RequestMethod.GET)
-	@ApiOperation(value = "Get Student", notes = "Get the details of a specific student", response = Student.class)
-	public @ResponseBody
-	StudentResource.StudentResponse getStudent(@PathVariable String student_id) {
-		return studentResourceAssembler.toResource(studentService
-				.getStudent(student_id));
-	}
+
 
 	@RequestMapping(method = RequestMethod.GET)
-	@ApiOperation(value = "Get Students", notes = "Get the list of students", response = Student.class, responseContainer = "List")
-	public List<StudentResource.StudentResponse> getStudents() {
-		return studentResourceAssembler.toResources(studentService
-				.getStudents());
+	@ApiOperation(value = "Get classes", notes = "Get the list of class", response = Student.class, responseContainer = "List")
+	public List<ClazzResource.ClazzResponse> getStudents() {
+		return clazzResourceAssembler.toResources(clazzService.getClassList());
 	}
 
-	@RequestMapping(method = RequestMethod.POST)
-	@ApiOperation(value = "Create Student", notes = "Create a student", response = StudentResource.StudentResponse.class)
-	public @ResponseBody
-	HttpEntity<StudentResource.StudentResponse> createStudent(
-			@RequestBody StudentResource.NewStudent student) {
-		StudentResource.StudentResponse createdStudentResource = studentResourceAssembler
-				.toResource(studentService.createStudent(new Student(student
-						.getFirstName(), student.getLastName())));
 
-		return new ResponseEntity<StudentResource.StudentResponse>(
-				createdStudentResource, HttpStatus.CREATED);
-	}
-
-	@RequestMapping(value = "/{clazz_id}", method = RequestMethod.DELETE)
-	public @ResponseBody
-	void deleteStudent(@PathVariable String student_id) {
-		studentService.deleteStudent(student_id);
-	}*/
 	
 	// TODO implementation of Patch
 }

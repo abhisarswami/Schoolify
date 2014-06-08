@@ -47,8 +47,8 @@ public class DBInitializer
 		
 		Role role1 = new Role("ROLE_USER");
 		Role role2 = new Role("ROLE_ADMIN");
-		User user1 = new User("admin", "admin@gmail.com", "admin",null);
-		User user2 = new User("user", "user@gmail.com", "user", null);
+		User user1 = new User("admin","admin", "admin@gmail.com", "admin",null);
+		User user2 = new User("user","user", "user@gmail.com", "user", null);
 
 		//role1.setUser(user1);
 		//role2.setUser(user1);

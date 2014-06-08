@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.AuthenticationManagerConfiguration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -36,7 +37,6 @@ public class UserXAuthTokenController {
 		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
 		Authentication authentication = this.authenticationManager.authenticate(token);
 		SecurityContextHolder.getContext().setAuthentication(authentication);
-
 		UserDetails details = this.userDetailsService.loadUserByUsername(username);
 
 		Map<String, Boolean> roles = new HashMap<String, Boolean>();

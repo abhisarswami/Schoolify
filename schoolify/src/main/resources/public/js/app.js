@@ -1,7 +1,7 @@
 
 var xAuthTokenHeaderName = 'x-auth-token';
 
-angular.module('exampleApp', ['ngRoute', 'ngCookies', 'exampleApp.services'])
+angular.module('schoolify', ['ngRoute', 'ngCookies', 'schoolify.services'])
 	.config(
 		[ '$routeProvider', '$locationProvider', '$httpProvider', function($routeProvider, $locationProvider, $httpProvider) {
 
@@ -103,11 +103,11 @@ angular.module('exampleApp', ['ngRoute', 'ngCookies', 'exampleApp.services'])
 
 function IndexController($scope, NewsService) {
 
-	$scope.newsEntries = NewsService.query();
+	$scope.students = StudentsService.query();
 
-	$scope.deleteEntry = function(newsEntry) {
+	$scope.deleteEntry = function(student) {
 		newsEntry.$remove(function() {
-			$scope.newsEntries = NewsService.query();
+			$scope.students = NewsService.query();
 		});
 	};
 }
@@ -115,10 +115,10 @@ function IndexController($scope, NewsService) {
 
 function EditController($scope, $routeParams, $location, NewsService) {
 
-	$scope.newsEntry = NewsService.get({id: $routeParams.id});
+	$scope.student = StudentsService.get({id: $routeParams.id});
 
 	$scope.save = function() {
-		$scope.newsEntry.$save(function() {
+		$scope.student.$save(function() {
 			$location.path('/');
 		});
 	};
@@ -127,7 +127,7 @@ function EditController($scope, $routeParams, $location, NewsService) {
 
 function CreateController($scope, $location, NewsService) {
 
-	$scope.newsEntry = new NewsService();
+	$scope.newsEntry = new StudentsService();
 
 	$scope.save = function() {
 		$scope.newsEntry.$save(function() {
@@ -150,7 +150,7 @@ function LoginController($scope, $rootScope, $location, $http, $cookieStore, Log
 }
 
 
-var services = angular.module('exampleApp.services', ['ngResource']);
+var services = angular.module('schoolify.services', ['ngResource']);
 
 services.factory('LoginService', function($resource) {
 
@@ -165,7 +165,7 @@ services.factory('LoginService', function($resource) {
 		);
 });
 
-services.factory('NewsService', function($resource) {
+services.factory('StudentsService', function($resource) {
 
-	return $resource('news/:id', {id: '@id'});
+	return $resource('students/:id', {id: '@id'});
 });

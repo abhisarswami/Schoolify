@@ -1,32 +1,32 @@
 package com.bitsatom.schoolify.authentication;
 
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.util.StringUtils;
-import org.springframework.web.filter.GenericFilterBean;
+import java.io.IOException;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 
-/**
- * Sifts through all incoming requests and installs a Spring Security principal
- * if a header corresponding to a valid user is found.
- *
- * @author Philip W. Sorst (philip@sorst.net)
- * @author Josh Long (josh@joshlong.com)
- */
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
+import org.springframework.web.filter.GenericFilterBean;
+
+@Component
+@Order(1)
 public class XAuthTokenFilter extends GenericFilterBean {
 
     private final UserDetailsService detailsService;
     private final TokenUtils tokenUtils = new TokenUtils();
     private String xAuthTokenHeaderName = "x-auth-token";
 
+    @Autowired
     public XAuthTokenFilter(UserDetailsService userDetailsService) {
         this.detailsService = userDetailsService;
     }
