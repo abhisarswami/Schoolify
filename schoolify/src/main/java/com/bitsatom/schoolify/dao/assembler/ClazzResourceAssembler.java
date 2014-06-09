@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 import com.bitsatom.schoolify.controller.ClazzController;
 import com.bitsatom.schoolify.dao.ClazzResource;
-import com.bitsatom.schoolify.model.Clazz;
+import com.bitsatom.schoolify.model.ClazzOfStudent;
 
 /**
  * @author 30155174
@@ -16,7 +16,7 @@ import com.bitsatom.schoolify.model.Clazz;
  */
 @Component
 public class ClazzResourceAssembler extends
-		ResourceAssemblerSupport<Clazz, ClazzResource.ClazzResponse> {
+		ResourceAssemblerSupport<ClazzOfStudent, ClazzResource.ClazzResponse> {
 
 	public ClazzResourceAssembler() {
 		super(ClazzController.class, ClazzResource.ClazzResponse.class);
@@ -24,7 +24,7 @@ public class ClazzResourceAssembler extends
 	}
 
 	@Override
-	public ClazzResource.ClazzResponse toResource(Clazz clazz) {
+	public ClazzResource.ClazzResponse toResource(ClazzOfStudent clazz) {
 		ClazzResource.ClazzResponse resource = createResourceWithId(
 				clazz.getId(), clazz);
 		return resource;
@@ -32,7 +32,7 @@ public class ClazzResourceAssembler extends
 
 	@Override
 	protected ClazzResource.ClazzResponse instantiateResource(
-			Clazz clazz) {
+			ClazzOfStudent clazz) {
 		return new ClazzResource.ClazzResponse(clazz.getId(),
 				clazz.getName());
 	}

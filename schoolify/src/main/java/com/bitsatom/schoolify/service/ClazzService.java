@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.bitsatom.schoolify.model.Clazz;
+import com.bitsatom.schoolify.model.ClazzOfStudent;
 import com.bitsatom.schoolify.persistence.ClazzRepository;
 
 @Service
@@ -20,7 +20,7 @@ public class ClazzService {
 		this.repository = repository;
 	}
 
-	public List<Clazz> getClassList(){
+	public List<ClazzOfStudent> getClassList(){
 		return repository.findAll();
 	}
 }

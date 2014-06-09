@@ -18,8 +18,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.GenericFilterBean;
 
-@Component
-@Order(1)
+
 public class XAuthTokenFilter extends GenericFilterBean {
 
     private final UserDetailsService detailsService;
