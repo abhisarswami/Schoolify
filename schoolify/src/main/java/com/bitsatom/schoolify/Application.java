@@ -11,7 +11,6 @@ import com.mangofactory.swagger.plugin.EnableSwagger;
 @EnableAutoConfiguration
 @ComponentScan
 @EnableSwagger
-@EnableWebMvc
 public class Application {
 	// @RequestMapping("/")
 	String home() {
