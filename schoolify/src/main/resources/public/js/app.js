@@ -1,28 +1,27 @@
 
 var xAuthTokenHeaderName = 'x-auth-token';
-
-angular.module('schoolify', ['ngRoute', 'ngCookies', 'schoolify.services'])
-	.config(
+angular.module('schoolify', ['schoolify.controllers','schoolify.services','ngRoute','ngCookies' ])
+.config(
 		[ '$routeProvider', '$locationProvider', '$httpProvider', function($routeProvider, $locationProvider, $httpProvider) {
 
 			$routeProvider.when('/create', {
 				templateUrl: 'partials/create.html',
-				controller: CreateController
+				controller: "CreateController"
 			});
 
 			$routeProvider.when('/edit/:id', {
 				templateUrl: 'partials/edit.html',
-				controller: EditController
+				controller: "EditController"
 			});
 
 			$routeProvider.when('/login', {
 				templateUrl: 'partials/login.html',
-				controller: LoginController
+				controller: "LoginController"
 			});
 
 			$routeProvider.otherwise({
 				templateUrl: 'partials/index.html',
-				controller: IndexController
+				controller: "IndexController"
 			});
 
 			$locationProvider.hashPrefix('!');
@@ -99,73 +98,5 @@ angular.module('schoolify', ['ngRoute', 'ngCookies', 'schoolify.services'])
 		}
 
 	});
+	
 
-
-function IndexController($scope, NewsService) {
-
-	$scope.students = StudentsService.query();
-
-	$scope.deleteEntry = function(student) {
-		newsEntry.$remove(function() {
-			$scope.students = NewsService.query();
-		});
-	};
-}
-
-
-function EditController($scope, $routeParams, $location, NewsService) {
-
-	$scope.student = StudentsService.get({id: $routeParams.id});
-
-	$scope.save = function() {
-		$scope.student.$save(function() {
-			$location.path('/');
-		});
-	};
-}
-
-
-function CreateController($scope, $location, NewsService) {
-
-	$scope.newsEntry = new StudentsService();
-
-	$scope.save = function() {
-		$scope.newsEntry.$save(function() {
-			$location.path('/');
-		});
-	};
-}
-
-
-function LoginController($scope, $rootScope, $location, $http, $cookieStore, LoginService) {
-
-	$scope.login = function() {
-		LoginService.authenticate($.param({username: $scope.username, password: $scope.password}), function(user) {
-			$rootScope.user = user;
-			$http.defaults.headers.common[ xAuthTokenHeaderName ] = user.token;
-			$cookieStore.put('user', user);
-			$location.path("/");
-		});
-	};
-}
-
-
-var services = angular.module('schoolify.services', ['ngResource']);
-
-services.factory('LoginService', function($resource) {
-
-	return $resource(':action', {},
-			{
-				authenticate: {
-					method: 'POST',
-					params: {'action' : 'authenticate'},
-					headers : {'Content-Type': 'application/x-www-form-urlencoded'}
-				}
-			}
-		);
-});
-
-services.factory('StudentsService', function($resource) {
-
-	return $resource('students/:id', {id: '@id'});
-});

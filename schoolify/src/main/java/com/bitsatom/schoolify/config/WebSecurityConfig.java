@@ -17,8 +17,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
 	private UserDetailsService userDetailsService;
 	
-	//@Autowired
-	//XAuthTokenFilter xAuthTokenFilter;
+	@Autowired
+	XAuthTokenFilter xAuthTokenFilter;
 	
 	@Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -34,7 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .and()
             .logout()
                 .permitAll();
-        //http.addFilterBefore(xAuthTokenFilter,BasicAuthenticationFilter.class);
+        http.addFilterBefore(xAuthTokenFilter,BasicAuthenticationFilter.class);
         
     }
 

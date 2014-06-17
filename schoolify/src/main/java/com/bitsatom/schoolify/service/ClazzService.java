@@ -23,4 +23,8 @@ public class ClazzService {
 	public List<ClazzOfStudent> getClassList(){
 		return repository.findAll();
 	}
+	
+	public ClazzOfStudent createClazz(ClazzOfStudent clazz){
+		return repository.save(clazz);
+	}
 }

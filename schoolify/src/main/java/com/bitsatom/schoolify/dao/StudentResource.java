@@ -1,6 +1,7 @@
 package com.bitsatom.schoolify.dao;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -14,6 +15,7 @@ public class StudentResource {
 
 	@ApiModel(value = "Student Model", description = "Student Model for creation of Student")
 	@ToString
+	@NoArgsConstructor
 	public static final class NewStudent {
 		@ApiModelProperty(value = "Student's first name", required = true)
 		@Getter

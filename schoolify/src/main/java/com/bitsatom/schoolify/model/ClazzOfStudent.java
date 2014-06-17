@@ -10,11 +10,13 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 
-@NoArgsConstructor
 @Entity
 @Table(name="CLAZZ")
+@ToString
+@NoArgsConstructor
 public class ClazzOfStudent extends BaseEntity {
 	
 	@Getter
@@ -29,6 +31,10 @@ public class ClazzOfStudent extends BaseEntity {
 	
 	public ClazzOfStudent(final String id, final String clazzName) {
 		this.id = id;
+		this.name = clazzName;
+	}
+	
+	public ClazzOfStudent(final String clazzName) {
 		this.name = clazzName;
 	}
 }

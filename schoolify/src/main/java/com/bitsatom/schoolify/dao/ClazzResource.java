@@ -13,8 +13,9 @@ public class ClazzResource {
 	@ApiModel(value = "Class Model", description = "Class Model for response of class")
 	public static final class ClazzResponse extends ResourceSupport {
 		@ApiModelProperty(value = "Student's Id", required = true)
+		@Getter
 		private @Id
-		String id;
+		String clazzId;
 
 		@ApiModelProperty(value = "Class name", required = true)
 		@Getter
@@ -22,7 +23,7 @@ public class ClazzResource {
 		
 
 		public ClazzResponse(final String id, final String clazzName) {
-			this.id = id;
+			this.clazzId = id;
 			this.clazzName = clazzName;
 		}
 	}

@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import com.bitsatom.schoolify.model.ClazzOfStudent;
 import com.bitsatom.schoolify.model.Role;
 import com.bitsatom.schoolify.model.User;
+import com.bitsatom.schoolify.service.ClazzService;
 import com.bitsatom.schoolify.service.UserRoleService;
 import com.bitsatom.schoolify.service.UserService;
 
@@ -23,6 +25,9 @@ public class DBInitializer
 	
 	@Autowired
 	private UserRoleService userRoleService;
+	
+	@Autowired
+	private ClazzService clazzService;
 
 	@Value("${init-db:false}")
 	private String initDatabase;
@@ -60,9 +65,11 @@ public class DBInitializer
 		user2.addRoles(role1);
 		userService.createUser(user2);
 		
-
 		logger.info("############   user details" + userService.findAll());
 
-
+		clazzService.createClazz(new ClazzOfStudent("Test Class 1"));
+		clazzService.createClazz(new ClazzOfStudent("Test Class 2"));
+		
+		logger.info("########## class details : " + clazzService.getClassList());
 	}
 }
