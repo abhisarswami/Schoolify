@@ -21,7 +21,7 @@ public class ClazzOfStudent extends BaseEntity {
 	
 	@Getter
 	@Setter
-	@Column(name = "id")
+	@Column(name = "clazz_id")
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
     private String id;

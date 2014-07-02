@@ -34,7 +34,7 @@ public class StudentServiceImpl implements StudentService  {
 	 * @see com.bitsatom.schoolify.service.StudentService#createStudent(com.bitsatom.schoolify.model.Student)
 	 */
 	@Override
-	public Student createStudent(final Student student){
+	public Student createOrUpdateStudent(final Student student){
 		return studentRepository.save(student);
 	}
 	
@@ -45,4 +45,5 @@ public class StudentServiceImpl implements StudentService  {
 	public void deleteStudent(final int student){
 		studentRepository.delete(student);
 	}
+
 }

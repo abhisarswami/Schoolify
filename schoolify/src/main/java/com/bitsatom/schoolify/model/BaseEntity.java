@@ -23,6 +23,10 @@ public class BaseEntity {
 	@Getter
 	@Version
 	private long version = 0;
+	
+	@Getter
+	@Version
+	private long deleted = 0;
 
 	@PreUpdate
 	public void preUpdate() {

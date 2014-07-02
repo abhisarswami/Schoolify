@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bitsatom.schoolify.dao.StudentResource;
 import com.bitsatom.schoolify.dao.assembler.StudentResourceAssembler;
+import com.bitsatom.schoolify.exception.SchoolifyException;
 import com.bitsatom.schoolify.model.Student;
 import com.bitsatom.schoolify.service.StudentService;
 import com.wordnik.swagger.annotations.Api;
@@ -60,11 +61,27 @@ public class StudentController {
 	HttpEntity<StudentResource.StudentResponse> createStudent(
 			@RequestBody StudentResource.NewStudent student) {
 		StudentResource.StudentResponse createdStudentResource = studentResourceAssembler
-				.toResource(studentService.createStudent(new Student(student
+				.toResource(studentService.createOrUpdateStudent(new Student(student
 						.getFirstName(), student.getLastName())));
 
 		return new ResponseEntity<StudentResource.StudentResponse>(
-				createdStudentResource, HttpStatus.CREATED);
+				createdStudentResource, HttpStatus.OK);
+	}
+	
+	@RequestMapping(method = RequestMethod.PUT)
+	@ApiOperation(value = "Update Student", notes = "Update a student", response = StudentResource.StudentResponse.class)
+	public @ResponseBody
+	HttpEntity<StudentResource.StudentResponse> updateStudent(
+			@RequestBody StudentResource.UpdateStudent student) throws SchoolifyException {
+		if (student.getStudent_id().isEmpty()){
+			throw new SchoolifyException("Invalid student id");
+		}
+		StudentResource.StudentResponse updatedStudentResource = studentResourceAssembler
+				.toResource(studentService.createOrUpdateStudent(new Student(student
+						.getFirstName(), student.getLastName())));
+
+		return new ResponseEntity<StudentResource.StudentResponse>(
+				updatedStudentResource, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/{student_id}", method = RequestMethod.DELETE)

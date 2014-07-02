@@ -31,7 +31,7 @@ public class StudentServiceImplTest {
 	public void saveNewStudent(){
 		final Student savedStudent = getSavedStudentFromRepository();
 		final Student student = new Student();
-		final Student returnedStudent = studentService.createStudent(student);
+		final Student returnedStudent = studentService.createOrUpdateStudent(student);
 		verify(studentRepository, times(1)).save(student);
 		assertEquals("returned student should come from repository",savedStudent, returnedStudent);
 	}

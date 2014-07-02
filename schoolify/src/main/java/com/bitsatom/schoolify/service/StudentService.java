@@ -8,8 +8,8 @@ public interface StudentService {
 
 	public abstract Iterable<Student> getStudents();
 
-	public abstract Student createStudent(Student student);
+	public abstract Student createOrUpdateStudent(Student student);
 
 	public abstract void deleteStudent(int student);
-
+	
 }

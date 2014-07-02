@@ -36,8 +36,9 @@ public class StudentResource {
 	@ApiModel(value = "Student Model", description = "Student Model for response of Student")
 	public static final class StudentResponse extends ResourceSupport {
 		@ApiModelProperty(value = "Student's Id", required = true)
+		@Getter
 		private @Id
-		String id;
+		String student_id;
 
 		@ApiModelProperty(value = "Student's first name", required = true)
 		@Getter
@@ -52,10 +53,35 @@ public class StudentResource {
 
 		public StudentResponse(final String id, final String firstName,
 				final String lastname) {
-			this.id = id;
+			this.student_id = id;
 			this.firstName = firstName;
 			this.lastName = lastname;
 		}
 	}
 
+	@ApiModel(value = "Student Model", description = "Student Model for response of Student")
+	public static final class UpdateStudent extends ResourceSupport {
+		@ApiModelProperty(value = "Student's Id", required = true)
+		@Getter @Setter
+		private @Id
+		String student_id;
+
+		@ApiModelProperty(value = "Student's first name", required = true)
+		@Getter
+		private String firstName;
+		@ApiModelProperty(value = "Student's last name", required = true)
+		@Getter
+		private String lastName;
+		
+		@ApiModelProperty(value = "Student's class", required = true)
+		@Setter @Getter
+		private String clazzId;
+
+		public UpdateStudent(final String id, final String firstName,
+				final String lastname) {
+			this.student_id = id;
+			this.firstName = firstName;
+			this.lastName = lastname;
+		}
+	}
 }
