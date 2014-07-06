@@ -25,7 +25,7 @@ public class Student extends BaseEntity{
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Getter @Setter
 	@JoinColumn(name="student_id")
-    private String id;
+    private String student_id;
 	
 	@Setter @Getter
 	@Column(name="first_name")

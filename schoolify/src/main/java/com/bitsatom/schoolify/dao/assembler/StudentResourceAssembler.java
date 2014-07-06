@@ -26,14 +26,14 @@ public class StudentResourceAssembler extends
 	@Override
 	public StudentResource.StudentResponse toResource(Student student) {
 		StudentResource.StudentResponse resource = createResourceWithId(
-				student.getId(), student);
+				student.getStudent_id(), student);
 		return resource;
 	}
 
 	@Override
 	protected StudentResource.StudentResponse instantiateResource(
 			Student student) {
-		return new StudentResource.StudentResponse(student.getId(),
+		return new StudentResource.StudentResponse(student.getStudent_id(),
 				student.getFirstName(), student.getLastName());
 	}
 

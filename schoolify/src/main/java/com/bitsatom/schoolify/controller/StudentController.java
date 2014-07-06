@@ -30,14 +30,15 @@ import com.wordnik.swagger.annotations.ApiOperation;
 @Api(value = "Student API", description = "Student API")
 public class StudentController {
 
-	@Autowired
 	private StudentService studentService;
+	
 	@Autowired
 	private StudentResourceAssembler studentResourceAssembler;
 
-	@Inject
-	public StudentController(StudentService studentService) {
+	@Autowired
+	public StudentController(StudentService studentService, StudentResourceAssembler studentResourceAssembler) {
 		this.studentService = studentService;
+		this.studentResourceAssembler = studentResourceAssembler;
 	}
 
 	@RequestMapping(value = "/{student_id}", method = RequestMethod.GET)

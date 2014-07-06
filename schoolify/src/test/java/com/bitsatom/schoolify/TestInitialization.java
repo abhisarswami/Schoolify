@@ -5,11 +5,11 @@ import com.bitsatom.schoolify.model.Student;
 
 public class TestInitialization {
 
-	private static final String testStudentFirstName = "firstName";
-	private static final String testStudentLastName = "lastName";
+	public static final String testStudentFirstName = "firstName";
+	public static final String testStudentLastName = "lastName";
 
-	private static final String testUpdatedStudentFirstName = "firstNameUpdated";
-	private static final String testUpdatedStudentLastName = "lastNameUpdated";
+	public static final String testUpdatedStudentFirstName = "firstNameUpdated";
+	public static final String testUpdatedStudentLastName = "lastNameUpdated";
 	
 	private static final String studentId = "1";
 
@@ -29,14 +29,14 @@ public class TestInitialization {
 	public static Student getUpdatedStudentEntity() {
 		studentUpdatedEntity = new Student(testUpdatedStudentFirstName,
 				testUpdatedStudentLastName);
-		  studentUpdatedEntity.setId(studentId);
+		  studentUpdatedEntity.setStudent_id(studentId);
 		  return studentUpdatedEntity;
 	}
 	
 	public static Student getCreatedStudentEntity() {
-		 studentCreatedEntity = new Student(testUpdatedStudentFirstName,
-				testUpdatedStudentLastName);
-		 studentCreatedEntity.setId(studentId);
+		 studentCreatedEntity = new Student(testStudentFirstName,
+				 testStudentLastName);
+		 studentCreatedEntity.setStudent_id(studentId);
 		  return studentCreatedEntity;
 	}
 
